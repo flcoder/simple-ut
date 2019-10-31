@@ -1,6 +1,6 @@
 {
   "name": "simple-ut",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "simple unit testing",
   "type": "module",
   "main": "index.js",
@@ -12,9 +12,10 @@
     "url": "git+https://github.com/flcoder/simple-ut.git"
   },
   "keywords": [
-    "simple",
+    "unit testing",
     "unit",
     "testing",
+    "simple",
     "js",
     "es6"
   ],
