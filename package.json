@@ -1,0 +1,30 @@
+{
+  "name": "simple-ut",
+  "version": "1.0.0",
+  "description": "simple unit testing",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flcoder/simple-ut.git"
+  },
+  "keywords": [
+    "simple",
+    "unit",
+    "testing",
+    "js",
+    "es6"
+  ],
+  "author": "William Oney <flcoder@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flcoder/simple-ut/issues"
+  },
+  "homepage": "https://github.com/flcoder/simple-ut#readme",
+  "dependencies": {
+    "ansi-ec": "^1.0.1"
+  }
+}
