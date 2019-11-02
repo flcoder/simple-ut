@@ -1,4 +1,4 @@
-import {execSync} from 'child_process'
+import {spawnSync} from 'child_process'
 import {RESET, CYAN, REV_RED, REV_GREEN, REV_YELLOW} from 'ansi-ec'
 
 process.on('unhandledRejection', (reason, promise) => {
@@ -6,10 +6,18 @@ process.on('unhandledRejection', (reason, promise) => {
 })
 
 export const LOG = console.log.bind(console)
-export function LOG_GOOD() { LOG(`${REV_GREEN}GOOD:${RESET}`, ...arguments) }
-export function LOG_BAD() { LOG(`${REV_RED}BAD:${RESET}`, ...arguments) }
+export function LOG_GOOD() { LOG(`\n${REV_GREEN}GOOD:${RESET}`, ...arguments) }
+export function LOG_BAD() { LOG(`\n${REV_RED}BAD:${RESET}`, ...arguments) }
 export function LOG_INFO() { LOG(`${CYAN}INFO:${RESET}`, ...arguments) }
-export function EXEC(cmd) { execSync(cmd, {stdio: `ignore`}) }
+export async function EXEC(cmd, ...args) {
+  const r = spawnSync(cmd, args)
+  if(r.status) {
+    const command = `${cmd} ${args.join(' ')}`
+    const error = new Error(`command: ${command}\n${r.stderr.toString()}`)
+    throw error
+  }
+  return r
+}
 
 export function PASS(info) { return {info, passed: true} }
 export function FAIL(info) { return {info} }
@@ -29,7 +37,8 @@ export async function RUN(tests) {
         LOG_BAD('No result')
       }
     } catch(e) {
-      LOG_BAD(`An exception was thrown: ${e}`)
+      LOG_BAD('An exception was thrown:')
+      LOG(e)
     }
   }
 }
