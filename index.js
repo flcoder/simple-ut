@@ -22,7 +22,11 @@ export async function EXEC(cmd, ...args) {
 
 export async function LOG_EXEC(...cmd) {
   LOG_INFO(`Executing command: ${cmd.join(' ')}`)
-  return await EXEC(...cmd)
+  const result = await EXEC(...cmd)
+  if(result.error) {
+    throw result.error
+  }
+  return result
 }
 
 export function PASS(info) { return {info, passed: true} }
