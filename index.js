@@ -9,6 +9,7 @@ export const LOG = console.log.bind(console)
 export function LOG_GOOD() { LOG(`\n${REV_GREEN}GOOD:${RESET}`, ...arguments) }
 export function LOG_BAD() { LOG(`\n${REV_RED}BAD:${RESET}`, ...arguments) }
 export function LOG_INFO() { LOG(`${CYAN}INFO:${RESET}`, ...arguments) }
+
 export async function EXEC(cmd, ...args) {
   const r = spawnSync(cmd, args)
   if(r.status) {
@@ -17,6 +18,11 @@ export async function EXEC(cmd, ...args) {
     throw error
   }
   return r
+}
+
+export async function LOG_EXEC(...cmd) {
+  LOG_INFO(`Executing command: ${cmd.join(' ')}`)
+  return await EXEC(...cmd)
 }
 
 export function PASS(info) { return {info, passed: true} }
